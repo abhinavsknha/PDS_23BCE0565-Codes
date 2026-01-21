@@ -1,47 +1,60 @@
-# Create a time vector representing minutes (1 to 60)
+# Time Vector (1 to 60 minutes)
+
 time <- 1:60
 
-# Vector representing temperature readings in Celsius
-temperature <- c(28, 29, 30, 31, 32, 33, 34, 32, 31, 30,
-                 29, 28, 27, 29, 30, 31, 32, 33, 34, 35,
-                 36, 34, 33, 32, 31, 30, 29, 28, 27, 26,
-                 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
-                 38, 36, 35, 34, 33, 32, 31, 30, 29, 28,
-                 27, 26, 25, 26, 27, 28, 29, 30, 31, 32)
+# Sensor Readings (60 different values each)
 
-# Vector representing humidity readings in percentage
-humidity <- c(45, 44, 43, 42, 41, 40, 39, 38, 37, 36,
-              35, 34, 33, 35, 37, 39, 41, 43, 45, 47,
-              48, 46, 44, 42, 40, 38, 36, 35, 34, 33,
-              32, 31, 30, 32, 34, 36, 38, 40, 42, 44,
-              45, 43, 41, 39, 37, 35, 33, 32, 31, 30,
-              29, 28, 27, 28, 29, 30, 31, 32, 33, 34)
+temperature <- c(
+  26, 26.5, 27, 27.4, 27.9, 28.3, 28.8, 29.2, 29.7, 30.1,
+  30.6, 31, 31.4, 31.9, 32.3, 32.8, 33.2, 33.6, 34, 34.4,
+  34.8, 35.2, 35.6, 36, 36.3, 36.6, 36.9, 37.2, 37.4, 37.6,
+  37.8, 38, 37.7, 37.4, 37, 36.6, 36.2, 35.8, 35.3, 34.9,
+  34.4, 33.9, 33.4, 32.9, 32.4, 31.9, 31.4, 30.9, 30.4, 29.9,
+  29.4, 28.9, 28.4, 27.9, 27.4, 26.9, 26.4, 26, 25.6, 25.2
+)
 
-# Vector representing pressure readings in hPa
-pressure <- c(1012, 1013, 1013, 1014, 1014, 1015, 1015, 1014, 1014, 1013,
-              1013, 1012, 1012, 1013, 1013, 1014, 1014, 1015, 1015, 1016,
-              1016, 1015, 1015, 1014, 1014, 1013, 1013, 1012, 1012, 1011,
-              1012, 1013, 1013, 1014, 1014, 1015, 1015, 1016, 1016, 1017,
-              1017, 1016, 1016, 1015, 1015, 1014, 1014, 1013, 1013, 1012,
-              1012, 1011, 1011, 1012, 1012, 1013, 1013, 1014, 1014, 1015)
+humidity <- c(
+  48, 47.5, 47, 46.6, 46.1, 45.6, 45, 44.4, 43.8, 43.2,
+  42.6, 42, 41.4, 40.8, 40.2, 39.6, 39, 38.4, 37.8, 37.2,
+  36.6, 36, 35.4, 34.8, 34.2, 33.6, 33, 32.5, 32, 31.5,
+  31, 30.6, 30.2, 30, 30.3, 30.7, 31.1, 31.6, 32.1, 32.7,
+  33.3, 33.9, 34.5, 35.1, 35.7, 36.3, 36.9, 37.5, 38.1, 38.7,
+  39.3, 39.9, 40.5, 41.1, 41.7, 42.3, 42.9, 43.5, 44.1, 44.7
+)
 
-# Calculate average temperature
-avg_temp <- mean(temperature)
+pressure <- c(
+  1015, 1014.8, 1014.6, 1014.4, 1014.2, 1014, 1013.8, 1013.6, 1013.4, 1013.2,
+  1013, 1012.8, 1012.6, 1012.4, 1012.2, 1012, 1011.8, 1011.6, 1011.4, 1011.2,
+  1011, 1010.8, 1010.6, 1010.4, 1010.2, 1010, 1009.8, 1009.6, 1009.4, 1009.2,
+  1009, 1009.1, 1009.3, 1009.5, 1009.7, 1009.9, 1010.1, 1010.3, 1010.5, 1010.7,
+  1010.9, 1011.1, 1011.3, 1011.5, 1011.7, 1011.9, 1012.1, 1012.3, 1012.5, 1012.7,
+  1012.9, 1013.1, 1013.3, 1013.5, 1013.7, 1013.9, 1014.1, 1014.3, 1014.5, 1014.7
+)
 
-# Calculate average humidity
-avg_humidity <- mean(humidity)
+# Average Sensor Values
 
-# Calculate average pressure
-avg_pressure <- mean(pressure)
+cat("Average Temperature:", mean(temperature), "°C\n")
+cat("Average Humidity:", mean(humidity), "%\n")
+cat("Average Pressure:", mean(pressure), "hPa\n")
 
-# Identify time intervals where temperature > 30°C and humidity < 40%
+# Critical Time Intervals
+
 critical_intervals <- time[temperature > 30 & humidity < 40]
+cat("Critical intervals:", critical_intervals, "\n")
 
-# Print average sensor readings
-cat("Average Temperature:", avg_temp, "°C\n")
-cat("Average Humidity:", avg_humidity, "%\n")
-cat("Average Pressure:", avg_pressure, "hPa\n\n")
+# Plots
 
-# Print identified time intervals
-cat("Time intervals where Temperature > 30°C and Humidity < 40%:\n")
-cat(critical_intervals, "\n")
+plot(time, temperature, type = "l",
+     xlab = "Time (minutes)",
+     ylab = "Temperature (°C)",
+     main = "Temperature Over Time")
+
+plot(time, humidity, type = "l",
+     xlab = "Time (minutes)",
+     ylab = "Humidity (%)",
+     main = "Humidity Over Time")
+
+plot(time, pressure, type = "l",
+     xlab = "Time (minutes)",
+     ylab = "Pressure (hPa)",
+     main = "Pressure Over Time")
